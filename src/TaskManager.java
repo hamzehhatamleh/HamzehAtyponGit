@@ -1,7 +1,11 @@
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+//edited by khaled
+
 
 public class TaskManager {
 
@@ -15,7 +19,8 @@ public class TaskManager {
             System.out.println("\nMenu:");
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
-            System.out.println("3. Exit");
+            System.out.println("3. Edit Task");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -28,6 +33,9 @@ public class TaskManager {
                     viewTasks(tasks);
                     break;
                 case 3:
+                    editTask(scanner, tasks);
+                    break;
+                case 4:
                     System.out.println("Goodbye!");
                     scanner.close();
                     return;
@@ -55,9 +63,28 @@ public class TaskManager {
         }
     }
 
+    // khaled's function
+    private static void editTask(Scanner scanner, List<String> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks available to edit.");
+            return;
+        }
 
+        System.out.print("Entertheof the task you want to edit: ");
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            System.out.println("Invalid task number.");
+        } else {
+            System.out.print("Enter the new task: ");
+            String newTask = scanner.nextLine();
+            tasks.set(taskNumber - 1, newTask);
+            System.out.println("Task updated successfully.");
+        }
+    }
 }
+
+
 
 
