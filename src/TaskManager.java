@@ -2,7 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 //  Ahmad's Edition
+
+
+// khaled has added the feature
 
 public class TaskManager {
 
@@ -16,8 +20,12 @@ public class TaskManager {
             System.out.println("\nMenu:");
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
+
             System.out.println("3. Delete Task");
-            System.out.println("4. Exit");
+
+            System.out.println("4. Edit Task");
+
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -32,7 +40,12 @@ public class TaskManager {
                 case 3:
                     deleteTask(scanner, tasks);
                     break;
+
                 case 4:
+                    editTask(scanner, tasks);
+                    break;
+
+                case 5:
                     System.out.println("Goodbye!");
                     scanner.close();
                     return;
@@ -60,6 +73,7 @@ public class TaskManager {
         }
     }
 
+
     // this function was added by ahmad
     private static void deleteTask(Scanner scanner, List<String> tasks) {
         if (tasks.isEmpty()) {
@@ -69,8 +83,8 @@ public class TaskManager {
             int taskNumber = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            if (taskNumber > 0 && taskNumber <= tasks.size()) {   tasks.set(taskNumber - 1, "[Deleted] " + tasks.get(taskNumber - 1));
-
+            if (taskNumber > 0 && taskNumber <= tasks.size()) {
+                tasks.set(taskNumber - 1, "[Deleted] " + tasks.get(taskNumber - 1));
                 tasks.remove(taskNumber - 1); // Remove the task at the specified index
                 System.out.println("Task deleted successfully.");
             } else {
@@ -78,5 +92,25 @@ public class TaskManager {
             }
         }
     }
-}
 
+    // khaled's function
+    private static void editTask(Scanner scanner, List<String> tasks) {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks available to edit.");
+            return;
+        }
+
+        System.out.print("Entertheof the task you want to edit: "); // Fixed typo
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
+            System.out.println("Invalid task number.");
+        } else {
+            System.out.print("Enter the new task: ");
+            String newTask = scanner.nextLine();
+            tasks.set(taskNumber - 1, newTask);
+            System.out.println("Task updated successfully.");
+        }
+    }
+}
